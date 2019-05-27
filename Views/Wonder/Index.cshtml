@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MichaelBrandonMorris.CivData.Entities.Wonder>
+
+@{
+    ViewData["Title"] = "Wonders";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Era
+            </th>
+            <th>
+                Technology
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @Html.DisplayFor(model => model)
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("table").DataTable();
+    </script>
+}

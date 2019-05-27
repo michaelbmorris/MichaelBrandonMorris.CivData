@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MichaelBrandonMorris.CivData.Entities.Wonder>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Tier</th>
+        <th>Name</th>
+        <th>Technology</th>
+        <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var wonder in Model.OrderBy(x => x.Tier).ThenBy(x => x.Name))
+    {
+        <tr>
+            <td>@wonder.Tier</td>
+            <td>
+                <a asp-action="Details" asp-route-id="@wonder.Id">@wonder.Name</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-controller="Technology" asp-route-id="@wonder.Technology.Id">@wonder.Technology.Name</a>
+            </td>
+            <td>@wonder.Cost</td>
+        </tr>
+    }
+    </tbody>
+</table>

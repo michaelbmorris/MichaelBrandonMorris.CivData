@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MichaelBrandonMorris.CivData.Entities.Era>
+
+@{
+    ViewData["Title"] = "Technologies";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row flex-nowrap" style="overflow-x: scroll;">
+        @foreach (var era in Model.Where(x => x.Technologies.Any()))
+        {
+            <div class="col-sm-auto">
+                <h3 class="text-center border-bottom">@era.Name</h3>
+                <div class="row">
+                    @for (var i = era.Technologies.Min(x => x.PositionX); i <= era.Technologies.Max(x => x.PositionX); i++)
+                    {
+                        <div class="col-sm-auto">
+                            @for (var j = Model.Min(x => x.Technologies.Min(y => y.PositionY)); j <= Model.Max(x => x.Technologies.Max(y => y.PositionY)); j++)
+                            {
+                                var technology = era.Technologies.SingleOrDefault(x => x.PositionX == i && x.PositionY == j);
+
+                                <div class="row">
+                                    <div class="col">
+                                        @if (technology == null)
+                                        {
+                                            <br/>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="Details" asp-route-id="@technology.Id">@technology.Name</a>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+</div>
+        

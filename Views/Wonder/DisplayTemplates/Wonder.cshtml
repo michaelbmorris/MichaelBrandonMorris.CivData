@@ -1,0 +1,19 @@
+﻿@model MichaelBrandonMorris.CivData.Entities.Wonder
+
+<tr>
+    <td>
+        @Model.Tier
+    </td>
+    <td>
+        <a asp-action="Details" asp-route-id="@Model.Id">@Model.Name</a>
+    </td>
+    <td data-sort="@Model.Technology.Era.Position">
+        <a asp-action="Details" asp-controller="Era" asp-route-id="@Model.Technology.Era.Id">@Model.Technology.Era.Name</a>
+    </td>
+    <td>
+        <a asp-action="Details" asp-controller="Technology" asp-route-id="@Model.Technology.Id">@Model.Technology.Name</a>
+    </td>
+    <td>
+        @Model.Cost
+    </td>
+</tr>

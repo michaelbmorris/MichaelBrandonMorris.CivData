@@ -1,0 +1,91 @@
+﻿@model MichaelBrandonMorris.CivData.Entities.Technology
+
+<h2>@Model.Name (Technology)</h2>
+
+<dl>
+    <dt>Era</dt>
+    <dd>
+        <a asp-action="Details" asp-controller="Era" asp-route-id="@Model.Era.Id">@Model.Era.Name</a>
+    </dd>
+    <dt>Cost</dt>
+    <dd>@Model.Cost</dd>
+    <dt>Cumulative Cost</dt>
+    <dd>@Model.CumulativeCost</dd>
+</dl>
+
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                Required Technologies
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var requiredTechnology in Model.RequiredTechnologies)
+                {
+                    <li class="list-group-item">
+                        <a asp-action="Details" asp-route-id="@requiredTechnology.Id">@requiredTechnology.Name</a>
+                    </li>
+                }
+                
+                @if (!Model.RequiredTechnologies.Any())
+                {
+                    <li class="list-group-item">None</li>
+                }
+            </ul>
+        </div>
+    </div>
+    
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                Unlocked Technologies
+            </div>
+            <ul class="list-group list-group-flush">
+                @foreach (var unlockedTechnology in Model.UnlockedTechnologies)
+                {
+                    <li class="list-group-item">
+                        <a asp-action="Details" asp-route-id="@unlockedTechnology.Id">@unlockedTechnology.Name</a>
+                    </li>
+                }
+
+                @if (!Model.UnlockedTechnologies.Any())
+                {
+                    <li class="list-group-item">None</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+        <h3>Wonders</h3>
+        @if (Model.Wonders.Any())
+        {
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Tier</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var wonder in Model.Wonders.OrderBy(x => x.Tier).ThenBy(x => x.Name))
+                {
+                    <tr>
+                        <td>@wonder.Tier</td>
+                        <td>
+                            <a asp-action="Details" asp-controller="Wonder" asp-route-id="@wonder.Id">@wonder.Name</a>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>None</p>
+        }
+        
+    </div>
+</div>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MichaelBrandonMorris.CivData.Entities.Civilization>
+
+@{
+    ViewData["Title"] = "Civilizations";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Leader)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @Html.DisplayFor(model => model)
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $("table").DataTable();
+    </script>
+}

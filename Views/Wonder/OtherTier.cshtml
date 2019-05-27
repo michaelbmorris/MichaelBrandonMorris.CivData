@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MichaelBrandonMorris.CivData.Entities.Wonder>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Era</th>
+        <th>Technology</th>
+        <th>Cost</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var wonder in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@wonder.Id">@wonder.Name</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Era" asp-route-id="@wonder.Technology.Era.Id">@wonder.Technology.Era.Name</a>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Technology" asp-route-id="@wonder.Technology.Id">@wonder.Technology.Name</a>
+                </td>
+                <td>
+                    @wonder.Cost
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

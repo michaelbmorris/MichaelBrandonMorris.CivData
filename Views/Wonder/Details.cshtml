@@ -1,0 +1,105 @@
+﻿@model MichaelBrandonMorris.CivData.Entities.Wonder
+
+<h2>@Model.Name (Wonder)</h2>
+
+<dl>
+    <dt>Era</dt>
+    <dd>
+        <a asp-action="Details" asp-controller="Era">@Model.Technology.Era.Name</a>
+    </dd>
+    
+    <dt>Technology</dt>
+    <dd>
+        <a asp-action="Details" asp-controller="Technology">@Model.Technology.Name</a>
+    </dd>
+    
+    <dt>Tier</dt>
+    <dd>@Model.Tier</dd>
+    
+    <dt>Cost</dt>
+    <dd>@Model.Cost</dd>
+</dl>
+
+<div class="accordion" id="other-wonders-accordion">
+    <!--Other Technology Wonders-->
+
+    <div class="card">
+        <div class="card-header" id="other-technology-wonders-heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#other-technology-wonders-collapse">
+                    Other @Model.Technology.Name Wonders
+                </button>
+            </h2>
+        </div>
+
+        <div id="other-technology-wonders-collapse" class="collapse show" aria-labelledby="other-technology-wonders-heading" data-parent="#other-wonders-accordion">
+            <div class="card-body" id="other-technology-wonders"></div>
+        </div>
+    </div>
+    
+    <!--Other Era Wonders-->
+
+    <div class="card">
+        <div class="card-header" id="other-era-wonders-heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#other-era-wonders-collapse">
+                    Other @Model.Technology.Era.Name Era Wonders
+                </button>
+            </h2>
+        </div>
+
+        <div id="other-era-wonders-collapse" class="collapse" aria-labelledby="other-era-wonders-heading" data-parent="#other-wonders-accordion">
+            <div class="card-body" id="other-era-wonders"></div>
+        </div>
+    </div>
+    
+    <!--Other Tier Wonders-->
+
+    <div class="card">
+        <div class="card-header" id="other-tier-wonders-heading">
+            <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#other-tier-wonders-collapse">
+                    Other Tier @Model.Tier Wonders
+                </button>
+            </h2>
+        </div>
+
+        <div id="other-tier-wonders-collapse" class="collapse" aria-labelledby="other-tier-wonders-heading" data-parent="#other-wonders-accordion">
+            <div class="card-body" id="other-tier-wonders"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var data = {
+                id: @Model.Id,
+                technologyId: @Model.Technology.Id
+            }
+
+            $.get("@Url.Action("OtherTechnology")", data).done(function(result) {
+                $("#other-technology-wonders").html(result);
+            });
+
+            data = {
+                id: @Model.Id,
+                eraId: @Model.Technology.Era.Id
+            }
+
+            $.get("@Url.Action("OtherEra")", data).done(function(result) {
+                $("#other-era-wonders").html(result);
+            });
+
+            data = {
+                id: @Model.Id,
+                tier: '@Model.Tier'
+            }
+
+            $.get("@Url.Action("OtherTier")", data).done(function(result) {
+                $("#other-tier-wonders").html(result);
+            });
+        });
+    </script>
+}

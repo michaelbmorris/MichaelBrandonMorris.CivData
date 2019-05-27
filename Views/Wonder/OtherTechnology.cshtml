@@ -1,0 +1,28 @@
+﻿@model IEnumerable<MichaelBrandonMorris.CivData.Entities.Wonder>
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tier</th>
+                <th>Name</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var wonder in Model)
+            {
+                <tr>
+                    <td>@wonder.Tier</td>
+                    <td>@wonder.Name</td>
+                    <td>@wonder.Cost</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <span>None</span>
+}
